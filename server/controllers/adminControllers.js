@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import Blog from '../models/Blog.js';
 import Comment from '../models/Comments.js';
+import Subscriber from '../models/Subscriber.js';
 
 export const adminLogin = (req, res) => {
     try {
@@ -40,8 +41,9 @@ export const getDashboard = async(req, res) =>{
         const comments = await Comment.countDocuments()
         const drafts = await Blog.countDocuments({isPublished: false})
 
+        const subscribers = await Subscriber.countDocuments();
         const dashboardData = {
-            blogs, comments, drafts, recentBlogs
+            blogs, comments, drafts, subscribers, recentBlogs
         }
         res.json({success:true, dashboardData})
     } catch (error) {
@@ -66,5 +68,27 @@ export const approveCommentById = async(req, res) =>{
         res.json({success: true, message: "Comment Approved Succesfully"})
     } catch (error) {
         res.json({success: false, message: error.message})
+    }
+}
+
+export const getAllSubscribers = async(req, res) =>{
+    try {
+        const subscribers = await Subscriber.find({}).sort({createdAt: -1});
+        res.json({success: true, subscribers});
+    } catch (error) {
+        res.json({success: false, message: error.message});
+    }
+}
+
+export const deleteSubscriberById = async(req, res) =>{
+    try {
+        const {id} = req.body;
+        if(!id){
+            return res.json({success: false, message: "Subscriber id is required"});
+        }
+        await Subscriber.findByIdAndDelete(id);
+        res.json({success: true, message: "Subscriber removed successfully"});
+    } catch (error) {
+        res.json({success: false, message: error.message});
     }
 }

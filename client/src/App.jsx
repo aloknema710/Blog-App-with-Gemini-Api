@@ -8,6 +8,7 @@ import AddBlog from './pages/admin/AddBlog'
 import ListBlog from './pages/admin/ListBlog'
 import Comments from './pages/admin/Comments'
 import Login from './components/admin/Login'
+import Subscribers from './pages/admin/Subscribers'
 import 'quill/dist/quill.snow.css'
 import { Toaster } from 'react-hot-toast'
 import { useAppContext } from './context/AppContext'
@@ -25,6 +26,7 @@ const App = () => {
             <Route path='addBlog' element={<AddBlog/>} />
             <Route path='listBlog' element={<ListBlog/>} />
             <Route path='comments' element={<Comments/>} />
+            <Route path='subscribers' element={<Subscribers/>} />
         </Route>
       </Routes>
     </div>
