@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom'
-import { assets, blog_data, comments_data } from '../assets/assets';
+import { assets } from '../assets/assets';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Moment from 'moment';
@@ -81,7 +81,7 @@ const Blog = () => {
       </div>
       
       <div className=' mx-5 max-w-5xl md:mx-auto my-10 mt-6'>
-        <img src={data.image} alt="" className=' rounded-3xl mb-5'/>
+        <img src={data.image} alt="" className='w-full max-w-3xl mx-auto object-cover rounded-3xl mb-5'/>
         <div className='rich-text max-w-3xl mx-auto' 
         dangerouslySetInnerHTML={{__html: data.description}}></div>
 
